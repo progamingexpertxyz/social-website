@@ -10,7 +10,7 @@ const testimonials = [
     company: "FlowSpark",
     name: "Emily Carter",
     role: "Head of Product at FlowSpark",
-    avatar: "https://randomuser.me/api/portraits/women/65.jpg",
+    avatar: "/65.jpg",
     quote:
       "Their design and development expertise helped us scale our MVP into a full-fledged platform. Highly collaborative and fast!",
     metric: "2.5M+",
@@ -20,7 +20,7 @@ const testimonials = [
     company: "Cometly",
     name: "Jacob Miller",
     role: "CTO at Cometly",
-    avatar: "https://randomuser.me/api/portraits/men/44.jpg",
+    avatar: "/44.jpg",
     quote:
       "Amazing attention to detail. The UI/UX clarity they provided helped reduce churn and improve onboarding dramatically.",
     metric: "1k+",
@@ -30,7 +30,7 @@ const testimonials = [
     company: "Enerflo",
     name: "Olivia Brooks",
     role: "CMO at Enerflo",
-    avatar: "https://randomuser.me/api/portraits/women/49.jpg",
+    avatar: "/49.jpg",
     quote:
       "Design quality was exceptional—pixel-perfect interfaces that helped us stand out in a crowded market.",
     metric: "5x",
@@ -40,7 +40,7 @@ const testimonials = [
     company: "Life Beats",
     name: "Michael Thompson",
     role: "Founder & CEO at Beats & Breathe",
-    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+    avatar: "/32.jpg",
     quote:
       "Communication was outstanding. They handled feedback professionally and delivered exactly what we envisioned.",
     metric: "1.5x",
@@ -50,7 +50,7 @@ const testimonials = [
     company: "Beats & Breathe",
     name: "Ahmed Yusuf",
     role: "CEO of Beats & Breathe",
-    avatar: "https://randomuser.me/api/portraits/men/34.jpg",
+    avatar: "/34.jpg",
     quote:
       "Communication was outstanding. They handled feedback professionally and delivered exactly what we envisioned.",
     metric: "1.5x",
