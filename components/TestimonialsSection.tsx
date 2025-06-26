@@ -150,11 +150,10 @@ const SuccessStories = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className={`snap-start shrink-0 w-[720px] h-[420px] p-8 rounded-3xl border transition-all duration-300 ${
-                    index === activeIndex
+                  className={`snap-start shrink-0 w-[720px] h-[420px] p-8 rounded-3xl border transition-all duration-300 ${index === activeIndex
                       ? "bg-white shadow-md border-gray-200"
                       : "bg-gray-100 shadow-sm border-gray-100"
-                  }`}
+                    }`}
                 >
                   <h4 className="text-gray-700 font-bold text-3xl mb-4">{t.company}</h4>
                   <p className="text-2xl font-medium text-gray-900 mb-6 leading-snug">
@@ -165,29 +164,32 @@ const SuccessStories = () => {
                     <span className="font-normal text-gray-500">{t.metricLabel}</span>
                   </div>
                   <div className="flex items-center gap-4 mt-6">
-                    <Image
-                      src={t.avatar}
-                      alt={t.name}
-                      width={60}
-                      height={60}
-                      className="rounded-full object-cover"
-                    />
+                    <div className="w-16 h-16 rounded-full overflow-hidden">
+                      <Image
+                        src={t.avatar}
+                        alt={t.name}
+                        width={64}
+                        height={64}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                     <div>
                       <div className="text-xl font-bold text-gray-900">{t.name}</div>
                       <div className="text-lg text-gray-500">{t.role}</div>
                     </div>
-                  </div>
+                 
+                </div>
                 </motion.div>
               ))}
-            </div>
           </div>
-
-          {/* Gradient fade edges */}
-          <div className="pointer-events-none absolute top-0 left-0 h-full w-16 bg-gradient-to-r from-gray-50 to-transparent z-10" />
-          <div className="pointer-events-none absolute top-0 right-0 h-full w-16 bg-gradient-to-l from-gray-50 to-transparent z-10" />
         </div>
+
+        {/* Gradient fade edges */}
+        <div className="pointer-events-none absolute top-0 left-0 h-full w-16 bg-gradient-to-r from-gray-50 to-transparent z-10" />
+        <div className="pointer-events-none absolute top-0 right-0 h-full w-16 bg-gradient-to-l from-gray-50 to-transparent z-10" />
       </div>
-    </section>
+    </div>
+    </section >
   );
 };
 
