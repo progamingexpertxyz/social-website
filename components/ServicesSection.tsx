@@ -28,7 +28,7 @@ const ServiceCard = ({
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6, delay: index * 0.2 }}
     viewport={{ once: true }}
-    className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-300"
+    className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-300 relative z-10"
   >
     <div className="mb-6">
       <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mb-4">
@@ -106,8 +106,11 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section className="py-section kaleo-dark-bg">
-      <div className="max-w-7xl mx-auto px-container">
+    <section className="py-section relative overflow-hidden bg-[#0f172a] text-white">
+      {/* 🔥 Glass Animated Overlay */}
+      <div className="absolute inset-0 z-0 animate-bgPulse pointer-events-none bg-[radial-gradient(circle_at_30%_30%,#ff008040,transparent_60%),radial-gradient(circle_at_70%_70%,#00bfff40,transparent_60%)] backdrop-blur-[2px]" />
+
+      <div className="max-w-7xl mx-auto px-container relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -115,7 +118,7 @@ const ServicesSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-section-header font-bold text-white">Our Services</h2>
+          <h2 className="text-section-header font-bold">Our Services</h2>
           <p className="text-body text-white/80 mt-4 max-w-4xl mx-auto">
             From marketing to full-stack development — we help brands scale fast and smart.
           </p>
