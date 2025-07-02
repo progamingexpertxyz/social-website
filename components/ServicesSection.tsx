@@ -128,14 +128,10 @@ const ServicesSection = () => {
   ];
 
   return (
-<<<<<<< HEAD
     <section
       id="services"
       className="py-section relative overflow-hidden bg-[#0f172a] text-white"
     >
-=======
-    <section className="py-section relative overflow-hidden bg-[#0f172a] text-white">
->>>>>>> ff0442c5437031aefb6e73b4c36f5bb3278677bb
       {/* 🔥 Glass Animated Overlay */}
       <div className="absolute inset-0 z-0 animate-bgPulse pointer-events-none bg-[radial-gradient(circle_at_30%_30%,#ff008040,transparent_60%),radial-gradient(circle_at_70%_70%,#00bfff40,transparent_60%)] backdrop-blur-[2px]" />
 
