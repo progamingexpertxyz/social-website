@@ -29,7 +29,7 @@ const projectOptions = [
   ];
 
   return (
-    <section className="py-section kaleo-gradient-bg">
+    <section id="contact" className="py-section kaleo-gradient-bg">
       <div className="max-w-7xl mx-auto px-container">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
           {/* Booking Card */}

@@ -64,6 +64,22 @@
     text-wrap: balance;
   }
 }
+@keyframes bgPulse {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+.animate-bgPulse {
+  animation: bgPulse 10s ease-in-out infinite;
+  background-size: 200% 200%;
+}
 
 /* Kaleo Design specific styles */
 .kaleo-hero-text {

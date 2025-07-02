@@ -1,107 +1,145 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { CheckCircle } from "lucide-react"; // Optional icon (you can change this)
+import { ThumbsUp, Sparkles } from "lucide-react";
 
 interface CaseStudyCardProps {
   title: string;
-  metrics: string[];
-  image: string;
+  video: string;
   index: number;
+  likes: string;
+  rating: string;
 }
 
-const CaseStudyCard = ({ title, metrics, image, index }: CaseStudyCardProps) => (
-  <motion.div
-    initial={{ opacity: 0, y: 40 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6, delay: index * 0.1 }}
-    viewport={{ once: true }}
-    whileHover={{ scale: 1.03 }}
-    className="group cursor-pointer w-full max-w-[800px] mx-auto transition-transform duration-300"
-  >
-    <div className="relative bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 h-[600px]">
-      {/* Background Image */}
-      <img
-        src={image}
-        alt={title}
-        className="w-full h-full object-cover transition-all duration-500 group-hover:opacity-20"
-      />
+const descriptions: { [key: string]: string } = {
+  "Web Development":
+    "We build lightning-fast, modern websites that don’t just look stunning — they perform flawlessly across all devices and help your business grow.",
+  "E-Commerce Development":
+    "Our e-commerce solutions are built to scale, boost conversion rates, and deliver seamless shopping experiences for your customers worldwide.",
+  "UI/UX Design":
+    "Every pixel matters. We design intuitive, clean, and emotionally engaging digital interfaces that turn users into loyal customers.",
+  "Content Writing":
+    "Powerful words, tailored for your brand. We write content that not only ranks on Google but also connects deeply with your audience.",
+};
 
-      {/* Overlay on Hover */}
-      <div className="absolute inset-0 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 p-6 text-center">
-        <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className=" backdrop-blur-lg px-8 py-6 "
-        >
-          <h3 className="text-4xl font-extrabold text-kaleo-text-primary mb-4">
-            {title}
-          </h3>
-          <div className="space-y-4 text-left">
-            {metrics.map((metric, idx) => (
-              <div key={idx} className="flex items-start space-x-3">
-                <CheckCircle className="w-5 h-5 text-kaleo-text-primary mt-1" />
-                <span className="text-lg font-medium text-kaleo-text-secondary">
-                  {metric}
-                </span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-    </div>
-  </motion.div>
-);
+const CaseStudyCard = ({
+  title,
+  video,
+  index,
+  likes,
+  rating,
+}: CaseStudyCardProps) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-const FeaturedWorkSection = () => {
-  const images = [
-    "/web.jpg",
-    "/soft.jpg",
-    "/ui.jpg",
-    "/content.jpg"
-  ];
+  const handleMouseEnter = () => {
+    requestAnimationFrame(() => {
+      if (videoRef.current?.paused) {
+        videoRef.current.play().catch(() => {});
+      }
+    });
+  };
 
- const caseStudies = [
-  {
-    title: "Web Development",
-    metrics: [
-      "Crafting modern, responsive, and user-friendly websites that adapt across all devices",
-      "Implementing cutting-edge frontend technologies like React, Next.js, and Tailwind CSS for lightning-fast experiences",
-      "SEO-friendly architecture to help your brand rank higher and reach a wider audience organically"
-    ]
-  },
-  {
-    title: "Software Development",
-    metrics: [
-      "Designing scalable and modular software solutions tailored to your business needs",
-      "Seamless integration with third-party APIs and systems to enhance functionality and automation",
-      "Security-first approach ensuring encrypted data, secure authentication, and high-performance delivery"
-    ]
-  },
-  {
-    title: "UI/UX Design",
-    metrics: [
-      "User research-driven design process to ensure intuitive and delightful digital experiences",
-      "Interactive wireframes, Figma prototypes, and usability testing for visual perfection",
-      "Data-backed design decisions that improve engagement, retention, and user satisfaction"
-    ]
-  },
-  {
-    title: "Content Writing",
-    metrics: [
-      "High-converting, SEO-optimized content crafted for blogs, websites, and campaigns",
-      "Brand storytelling that emotionally connects with your audience and drives loyalty",
-      "Experienced writers skilled in technical, creative, academic, and marketing content creation"
-    ]
-  }
-];
+  const handleMouseLeave = () => {
+    requestAnimationFrame(() => {
+      if (videoRef.current && !videoRef.current.paused) {
+        videoRef.current.pause();
+        videoRef.current.currentTime = 0;
+      }
+    });
+  };
 
   return (
-    <section className="py-16 kaleo-gradient-bg">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      whileHover={{
+        scale: 1.03,
+        transition: { duration: 0.4, ease: "easeInOut" },
+      }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="group cursor-pointer w-full max-w-[1000px] mx-auto transition-transform duration-300"
+    >
+      <div className="relative rounded-2xl overflow-hidden shadow-2xl transition-all duration-300 h-[600px]">
+        {/* Video */}
+        <video
+          ref={videoRef}
+          muted
+          loop
+          playsInline
+          controls={false}
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        >
+          <source src={video} type="video/mp4" />
+        </video>
+
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-tr from-[#ffffff0d] via-[#ffffff1a] to-[#ffffff0d] mix-blend-overlay opacity-60" />
+
+        {/* Text Overlay */}
+        <div className="absolute inset-0 z-20 bg-black/50 backdrop-blur-sm text-white px-10 py-12 flex flex-col items-center justify-center text-center opacity-100 group-hover:opacity-0 transition-all duration-700 ease-in-out">
+          <div>
+            <h3 className="text-4xl font-bold mb-4 drop-shadow-lg">{title}</h3>
+            <p className="text-lg leading-relaxed font-medium max-w-2xl mx-auto drop-shadow">
+              {descriptions[title]}
+            </p>
+          </div>
+          <div className="flex gap-10 items-center justify-center text-xl font-semibold mt-10">
+            <div className="flex items-center gap-2">
+              <ThumbsUp className="w-6 h-6 text-green-400" />
+              <span>{likes} Likes</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-6 h-6 text-yellow-400" />
+              <span>{rating} Rating</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+const FeaturedWorkSection = () => {
+  const caseStudies = [
+    {
+      title: "Web Development",
+      video: "/web.mp4",
+      likes: "2.4k",
+      rating: "4.9",
+    },
+    {
+      title: "E-Commerce Development",
+      video: "/ecommerce.mp4",
+      likes: "3.1k",
+      rating: "4.8",
+    },
+    {
+      title: "UI/UX Design",
+      video: "/ui.mp4",
+      likes: "2.7k",
+      rating: "4.95",
+    },
+    {
+      title: "Content Writing",
+      video: "/content.mp4",
+      likes: "1.9k",
+      rating: "4.7",
+    },
+  ];
+
+  const scrollToContact = () => {
+    const el = document.getElementById("contact");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <section id="featured" className="py-20 kaleo-gradient-bg">
       <div className="max-w-7xl mx-auto px-container">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -109,26 +147,27 @@ const FeaturedWorkSection = () => {
           viewport={{ once: true }}
           className="flex justify-between items-center mb-16"
         >
-          <h2 className="text-section-header font-bold text-kaleo-text-primary">
-            Featured Services
+          <h2 className="text-5xl font-bold text-kaleo-text-primary">
+            Featured Work
           </h2>
-          <Link
-            href="/contact"
-            className="text-2xl font-medium text-kaleo-text-primary border border-kaleo-text-primary px-4 py-2 rounded-full hover:bg-kaleo-text-primary hover:text-white transition"
+          <button
+            onClick={scrollToContact}
+            className="text-2xl font-medium text-kaleo-text-primary border border-kaleo-text-primary px-6 py-3 rounded-full hover:bg-kaleo-text-primary hover:text-white transition"
           >
             View All
-          </Link>
+          </button>
         </motion.div>
 
-        {/* 2x2 Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
-          {caseStudies.map((s, idx) => (
+        {/* Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
+          {caseStudies.map((study, idx) => (
             <CaseStudyCard
-              key={s.title}
-              title={s.title}
-              metrics={s.metrics}
-              image={images[idx]}
+              key={study.title}
+              title={study.title}
+              video={study.video}
               index={idx}
+              likes={study.likes}
+              rating={study.rating}
             />
           ))}
         </div>

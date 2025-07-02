@@ -19,142 +19,156 @@ const Navigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+      setIsMobileMenuOpen(false);
+    }
+  };
+
   return (
     <header
       className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-300",
-        isScrolled
-          ? "bg-white/95 backdrop-blur-sm shadow-sm"
-          : "bg-transparent",
+        "fixed top-4 left-1/2 -translate-x-1/2 z-50 w-fit px-6 py-2 rounded-full transition-all duration-300 border border-white/30 bg-white/20 backdrop-blur-md shadow-md",
+        isScrolled ? "shadow-xl" : ""
       )}
     >
-      <div className="max-w-7xl mx-auto px-container">
-        <div className="flex items-center justify-between h-20">
-    <Link href="/" className="relative w-10 h-10">
-        <Image
-          src="/logo.png" 
-          alt="Social Logo"
-          fill
-          className="object-contain"
-          priority
-        />
-      </Link>
+      {/* 🔥 Background Overlay */}
+      <div className="absolute inset-0 z-0 animate-bgPulse pointer-events-none bg-[radial-gradient(circle_at_30%_30%,#ff008040,transparent_60%),radial-gradient(circle_at_70%_70%,#00bfff40,transparent_60%)] backdrop-blur-[2px] rounded-full" />
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link
-              href="/case-studies"
-              className="text-kaleo-text-primary hover:text-kaleo-gray-900 transition-colors"
+      {/* 🔘 Navigation Content */}
+      <div className="relative z-10 flex items-center justify-between gap-8">
+        {/* Logo */}
+        <Link href="/" className="relative w-10 h-10 shrink-0">
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            fill
+            className="object-contain"
+            priority
+          />
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-6">
+          <button
+            onClick={() => scrollToSection("featured")}
+            className="text-sm font-medium text-gray-800 hover:text-black transition-colors"
+          >
+            Portfolio
+          </button>
+
+          <button
+            onClick={() => scrollToSection("about")}
+            className="text-sm font-medium text-gray-800 hover:text-black transition-colors"
+          >
+            About
+          </button>
+
+          <div className="relative group">
+            <button
+              onClick={() => scrollToSection("services")}
+              className="flex items-center space-x-1 text-sm font-medium text-gray-800 hover:text-black transition-colors"
             >
-              Portfolio
-            </Link>
-            <Link
-              href="/about"
-              className="text-kaleo-text-primary hover:text-kaleo-gray-900 transition-colors"
-            >
-              About
-            </Link>
-            <div className="relative group">
-              <button className="flex items-center space-x-1 text-kaleo-text-primary hover:text-kaleo-gray-900 transition-colors">
-                <span>Services</span>
-                <ChevronDown className="h-4 w-4" />
-              </button>
-              <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                <div className="py-2">
-  {/* Overview */}
-  <div className="px-4 py-2 text-xs uppercase tracking-wider text-kaleo-text-secondary">
-    Our Services
-  </div>
-  <Link
-    href="/services/digital-marketing"
-    className="block px-4 py-2 text-sm text-kaleo-text-primary hover:bg-kaleo-gray-50"
-  >
-    Digital Marketing (Google Ads, SMM, PPC, Email)
-  </Link>
-  <Link
-    href="/services/conversion-optimization"
-    className="block px-4 py-2 text-sm text-kaleo-text-primary hover:bg-kaleo-gray-50"
-  >
-    Conversion Optimization
-  </Link>
-  <Link
-    href="/services/design-development"
-    className="block px-4 py-2 text-sm text-kaleo-text-primary hover:bg-kaleo-gray-50"
-  >
-    Design & Development (Web, UI/UX, CRM)
-  </Link>
-  <Link
-    href="/services/software-development"
-    className="block px-4 py-2 text-sm text-kaleo-text-primary hover:bg-kaleo-gray-50"
-  >
-    Software Development
-  </Link>
-  <Link
-    href="/services/content-strategy"
-    className="block px-4 py-2 text-sm text-kaleo-text-primary hover:bg-kaleo-gray-50"
-  >
-    Content & Strategy (Writing, Funnel)
-  </Link>
-  <Link
-    href="/services/ecommerce-optimization"
-    className="block px-4 py-2 text-sm text-kaleo-text-primary hover:bg-kaleo-gray-50"
-  >
-    E-Commerce & SEO (Amazon, Store Setup)
-  </Link>
-</div>
+              <span>Services</span>
+              <ChevronDown className="h-4 w-4" />
+            </button>
+
+            {/* Dropdown Services List */}
+            <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+              <div className="py-2">
+                <div className="px-4 py-2 text-xs uppercase tracking-wider text-gray-500">
+                  Our Services
+                </div>
+                {[
+                  {
+                    href: "/services/digital-marketing",
+                    label: "Digital Marketing (Google Ads, SMM, PPC, Email)",
+                  },
+                  {
+                    href: "/services/conversion-optimization",
+                    label: "Conversion Optimization",
+                  },
+                  {
+                    href: "/services/design-development",
+                    label: "Design & Development (Web, UI/UX, CRM)",
+                  },
+                  {
+                    href: "/services/software-development",
+                    label: "Software Development",
+                  },
+                  {
+                    href: "/services/content-strategy",
+                    label: "Content & Strategy (Writing, Funnel)",
+                  },
+                  {
+                    href: "/services/ecommerce-optimization",
+                    label: "E-Commerce & SEO (Amazon, Store Setup)",
+                  },
+                ].map((item, idx) => (
+                  <Link
+                    key={idx}
+                    href={item.href}
+                    className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
               </div>
             </div>
-          </nav>
-
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <Button variant="dark" size="lg">
-              Start a Project
-            </Button>
           </div>
+        </nav>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2"
+        {/* Start Project Button */}
+        <div className="hidden md:block">
+          <Button
+            onClick={() => scrollToSection("contact")}
+            size="lg"
+            className="rounded-full bg-white/30 backdrop-blur-md border border-white/20 text-gray-900 hover:bg-white/50 transition-all shadow-md"
           >
-            {isMobileMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </button>
+            Start a Project
+          </Button>
         </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-kaleo-border bg-white">
-            <div className="py-4 space-y-4">
-              <Link
-                href="/case-studies"
-                className="block text-kaleo-text-primary hover:text-kaleo-gray-900"
-              >
-                Case Studies
-              </Link>
-              <Link
-                href="/about"
-                className="block text-kaleo-text-primary hover:text-kaleo-gray-900"
-              >
-                About
-              </Link>
-              <Link
-                href="/services"
-                className="block text-kaleo-text-primary hover:text-kaleo-gray-900"
-              >
-                Services
-              </Link>
-              <Button variant="dark" className="w-full">
-                Start a Project
-              </Button>
-            </div>
-          </div>
-        )}
+        {/* Mobile Menu Toggle */}
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="md:hidden p-2"
+        >
+          {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
       </div>
+
+      {/* Mobile Menu Content */}
+      {isMobileMenuOpen && (
+        <div className="relative mt-4 md:hidden border-t border-white/30 bg-white/80 backdrop-blur-md rounded-xl shadow-lg px-4 py-6 space-y-4">
+          <button
+            onClick={() => scrollToSection("featured")}
+            className="block text-sm font-medium text-gray-800 hover:text-black"
+          >
+            Portfolio
+          </button>
+          <button
+            onClick={() => scrollToSection("about")}
+            className="block text-sm font-medium text-gray-800 hover:text-black"
+          >
+            About
+          </button>
+          <button
+            onClick={() => scrollToSection("services")}
+            className="block text-sm font-medium text-gray-800 hover:text-black"
+          >
+            Services
+          </button>
+          <Button
+            onClick={() => scrollToSection("contact")}
+            className="w-full rounded-full bg-white/30 backdrop-blur-md border border-white/20 text-gray-900 hover:bg-white/50 transition-all shadow-md"
+          >
+            Start a Project
+          </Button>
+        </div>
+      )}
     </header>
   );
 };

@@ -3,7 +3,13 @@
 import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Mail, Instagram, Facebook, Twitter, Linkedin } from "lucide-react";
+import {
+  Mail,
+  Instagram,
+  Facebook,
+  Twitter,
+  Linkedin,
+} from "lucide-react";
 
 const Footer = () => {
   const footerColumns = [
@@ -13,36 +19,18 @@ const Footer = () => {
         { name: "About us", href: "/about" },
         { name: "Testimonials", href: "/testimonials" },
         { name: "Portfolio", href: "/Portfolio" },
-        { name: "Start a Project", href: "/contact" },
+        { name: "Start a Project", href: "/contact" }, // Optional: Keep for navigation
       ],
     },
     {
       title: "Our Services",
       links: [
-        {
-          name: "Digital Marketing ",
-          href: "/services/digital-marketing",
-        },
-        {
-          name: "Conversion Optimization",
-          href: "/services/conversion-optimization",
-        },
-        {
-          name: "Design & Development ",
-          href: "/services/design-development",
-        },
-        {
-          name: "Software Development",
-          href: "/services/software-development",
-        },
-        {
-          name: "Content & Strategy ",
-          href: "/services/content-strategy",
-        },
-        {
-          name: "E-Commerce & SEO ",
-          href: "/services/ecommerce-optimization",
-        },
+        { name: "Digital Marketing ", href: "/services/digital-marketing" },
+        { name: "Conversion Optimization", href: "/services/conversion-optimization" },
+        { name: "Design & Development ", href: "/services/design-development" },
+        { name: "Software Development", href: "/services/software-development" },
+        { name: "Content & Strategy ", href: "/services/content-strategy" },
+        { name: "E-Commerce & SEO ", href: "/services/ecommerce-optimization" },
       ],
     },
     {
@@ -64,18 +52,34 @@ const Footer = () => {
     },
   ];
 
+  // ✅ Smooth scroll function
+  const scrollToContact = () => {
+    const el = document.getElementById("contact");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      console.warn("Contact section not found.");
+    }
+  };
+
   return (
-    <footer className="kaleo-dark-bg">
+    <footer className="relative kaleo-dark-bg overflow-hidden">
+      {/* 🔥 Multicolor Glass Overlay */}
+      <div className="absolute inset-0 z-0 animate-bgPulse pointer-events-none bg-[radial-gradient(circle_at_30%_30%,#ff008040,transparent_60%),radial-gradient(circle_at_70%_70%,#00bfff40,transparent_60%)] backdrop-blur-[2px]" />
+
       {/* Footer Header */}
-      <div className="border-b border-white/10">
+      <div className="border-b border-white/10 relative z-10">
         <div className="max-w-7xl mx-auto px-container py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-subheader font-bold text-white mb-6">
-                WE ARE THE END POINT <br/>
+                WE ARE THE END POINT <br />
                 FOR ALL YOUR DIGITAL MARKETING NEEDS.
               </h2>
+
+              {/* ✅ Start a Project with Scroll */}
               <Button
+                onClick={scrollToContact}
                 variant="outline"
                 size="lg"
                 className="border-white text-white hover:bg-white hover:text-kaleo-gray-900"
@@ -105,7 +109,7 @@ const Footer = () => {
       </div>
 
       {/* Footer Navigation */}
-      <div className="max-w-7xl mx-auto px-container py-16">
+      <div className="max-w-7xl mx-auto px-container py-16 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {footerColumns.map((column) => (
             <div key={column.title}>
@@ -139,17 +143,17 @@ const Footer = () => {
       </div>
 
       {/* Footer Bottom */}
-      <div className="border-t border-white/10">
+      <div className="border-t border-white/10 relative z-10">
         <div className="max-w-7xl mx-auto px-container py-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-           {/* Logo - Only PNG */}
-<div className="flex items-center">
-  <img
-    src="/logo.png" // 👈 replace this with your actual PNG path
-    alt=" Logo"
-    className="h-10 w-auto object-contain"
-  />
-</div>
+            {/* Logo */}
+            <div className="flex items-center">
+              <img
+                src="/logo.png"
+                alt="Logo"
+                className="h-10 w-auto object-contain"
+              />
+            </div>
 
             {/* Social Links */}
             <div className="flex items-center space-x-4">

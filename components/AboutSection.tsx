@@ -40,8 +40,16 @@ const AboutSection = () => {
     },
   ];
 
+  // 🔽 Scroll to contact
+  const scrollToContact = () => {
+    const el = document.getElementById("contact");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <section className="py-section bg-white">
+    <section id="about" className="py-section bg-white">
       <div className="max-w-7xl mx-auto px-container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Text Section */}
@@ -77,11 +85,11 @@ const AboutSection = () => {
 
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="dark" size="lg">
+              <Button variant="dark" size="lg" onClick={scrollToContact}>
                 Start a Project
               </Button>
-              <Button variant="outline" size="lg">
-                Learn more
+              <Button variant="outline" size="lg" onClick={scrollToContact}>
+                Learn More
               </Button>
             </div>
           </motion.div>
@@ -96,7 +104,7 @@ const AboutSection = () => {
           >
             <div className="w-90 overflow-hidden -mt-24 ml-16">
               <Image
-                src="/logo.png" // ✅ Replace with your image
+                src="/logo.png" // ✅ Replace with your actual image
                 alt="Our Partners"
                 width={800}
                 height={600}
@@ -104,7 +112,7 @@ const AboutSection = () => {
               />
             </div>
 
-            {/* Optional decorative motion dots */}
+            {/* Decorative Dots */}
             <motion.div
               animate={{ rotate: [0, 360] }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
