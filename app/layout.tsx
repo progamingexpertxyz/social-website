@@ -15,25 +15,21 @@ export const metadata: Metadata = {
   description:
     "Expert in design, Development, and Strategy for Your Digital Products.",
   keywords: [
-    "FlutterFlow",
-    "MVP Development",
     "Product Design",
-    "Mobile App Design",
-    "User Experience Design",
+    "UI/UX Design",
+    "Web Development",
+    "Mobile App Development",
+    "Software Development",
+    "Digital Strategy",
+    "Custom Software Solutions",
+    "E-commerce Solutions",
   ],
-  authors: [{ name: "Kaleo Design" }],
+  authors: [{ name: "SOCIAL." }],
   openGraph: {
-    title: "Kaleo Design - Apps don't build themselves. We do.",
-    description:
-      "Expert FlutterFlow Development, MVP Development, and Exceptional Product Design.",
+    title: "We are end point for your digital needs.",
     type: "website",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Kaleo Design - Apps don't build themselves. We do.",
-    description:
-      "Expert FlutterFlow Development, MVP Development, and Exceptional Product Design.",
-  },
+ 
 };
 
 export default function RootLayout({
