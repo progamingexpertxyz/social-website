@@ -11,7 +11,7 @@ import CompaniesMarquee from "@/components/CompaniesMarquee";
 export default function HomePage() {
   return (
     <main className="min-h-screen">
-      <Navigation />
+      
       <HeroSection />
       <CompaniesMarquee />
       <FeaturedWorkSection />
@@ -19,7 +19,7 @@ export default function HomePage() {
       <ServicesSection />
       <AboutSection />
       <ContactSection />
-      <Footer />
+     
     </main>
   );
 }

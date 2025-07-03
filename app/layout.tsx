@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import "./globals.css";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 
 const figtree = Figtree({
   subsets: ["latin"],
@@ -24,8 +26,6 @@ export const metadata: Metadata = {
     title: "Kaleo Design - Apps don't build themselves. We do.",
     description:
       "Expert FlutterFlow Development, MVP Development, and Exceptional Product Design.",
-    url: "https://kaleo.design",
-    siteName: "Kaleo Design",
     type: "website",
   },
   twitter: {
@@ -43,7 +43,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={figtree.variable}>
-      <body className={`${figtree.className} antialiased`}>{children}</body>
+      <body className={`${figtree.className} antialiased`}>
+        <Navigation />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

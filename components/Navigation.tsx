@@ -83,11 +83,11 @@ const Navigation = () => {
                 </div>
                 {[
                   {
-                    href: "/services/digital-marketing",
+                    href: "/Digital-marketing",
                     label: "Digital Marketing (Google Ads, SMM, PPC, Email)",
                   },
                   {
-                    href: "/services/conversion-optimization",
+                    href: "/Conversion-optimization",
                     label: "Conversion Optimization",
                   },
                   {

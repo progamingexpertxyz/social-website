@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,14 +8,21 @@ import { Textarea } from "@/components/ui/textarea";
 import { Calendar, Phone } from "lucide-react";
 
 const ContactSection = () => {
-const projectOptions = [
-  "Digital Marketing (Google Ads, SMM, PPC, Email)",
-  "Conversion Optimization",
-  "Design & Development (Web, UI/UX, CRM)",
-  "Software Development",
-  "Content & Strategy (Writing, Funnel)",
-  "E-Commerce & SEO (Amazon, Store Setup)"
-];
+ const [selectedService, setSelectedService] = useState<string | null>(null);
+
+  const servicesWithSub = {
+    "Digital Marketing": [
+      "Google Ads",
+      "Social Media Marketing",
+      "Pay Per Click",
+      "Email Marketing",
+    ],
+    "Conversion Optimization": [],
+    "Design & Development": ["Web", "UI/UX", "CRM"],
+    "Software Development": [],
+    "Content & Strategy": ["Writing", "Funnel"],
+    "E-Commerce & SEO": ["Amazon", "Store Setup"],
+  };
 
   const budgetOptions = ["Under $20k", "$20k - $40k", "$40k - $60k", "$60k+"];
 
@@ -89,27 +96,44 @@ const projectOptions = [
                   rows={4}
                 />
 
-                {/* Project Type */}
+                 {/* Dynamic Project Options */}
                 <div className="space-y-3">
-                  <label className="text-sm font-medium text-kaleo-text-primary">
-                    What is your project about?
+                  <label className="text-sm font-medium text-white">
+                    Select a Service
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {projectOptions.map((option) => (
-                      <label
-                        key={option}
-                        className="flex items-center space-x-3 cursor-pointer"
-                      >
-                        <input
-                          type="radio"
-                          name="project-type"
-                          value={option}
-                          className="w-4 h-4 text-kaleo-gray-900 border-kaleo-border focus:ring-kaleo-gray-900"
-                        />
-                        <span className="text-sm text-kaleo-text-primary">
-                          {option}
-                        </span>
-                      </label>
+                    {Object.entries(servicesWithSub).map(([main, sub]) => (
+                      <div key={main}>
+                        <label className="flex items-center space-x-3 cursor-pointer">
+                          <input
+                            type="radio"
+                            name="service"
+                            value={main}
+                            checked={selectedService === main}
+                            onChange={() => setSelectedService(main)}
+                            className="w-4 h-4 text-black border-white bg-transparent focus:ring-white"
+                          />
+                          <span className="text-sm text-black">{main}</span>
+                        </label>
+                        {selectedService === main && sub.length > 0 && (
+                          <div className="ml-6 mt-2 space-y-1">
+                            {sub.map((item) => (
+                              <label
+                                key={item}
+                                className="flex items-center space-x-2 cursor-pointer"
+                              >
+                                <input
+                                  type="checkbox"
+                                  name="subservice"
+                                  value={item}
+                                  className="w-4 h-4 text-black border-white bg-transparent focus:ring-white"
+                                />
+                                <span className="text-sm text-black">{item}</span>
+                              </label>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     ))}
                   </div>
                 </div>
