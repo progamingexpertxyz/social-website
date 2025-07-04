@@ -5,7 +5,6 @@ import { motion, useInView } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 import ContactPage from "@/components/contectpage";
 
-// Counter Hook
 function useCounter(target: number, trigger: boolean, duration = 1000) {
   const [count, setCount] = useState(0);
   useEffect(() => {
@@ -15,8 +14,8 @@ function useCounter(target: number, trigger: boolean, duration = 1000) {
       if (!startTime) startTime = timestamp;
       const elapsed = timestamp - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(eased * target));
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(easedProgress * target));
       if (progress < 1) requestAnimationFrame(animate);
     };
     requestAnimationFrame(animate);
@@ -24,54 +23,57 @@ function useCounter(target: number, trigger: boolean, duration = 1000) {
   return count;
 }
 
-// Sections Data
 const sections = [
   {
-    title: "Google Ads Services",
-    image: "/ads.png",
-    description: `Drive traffic, boost visibility, and grow your business with targeted Google Ads and measurable ROI.`,
+    title: "Website Design",
+    image: "/design-section.png",
+    description:
+      "We specialize in creating beautiful, functional, and effective websites tailored to your brand and goals.",
     bullets: [
-      "In-depth keyword research.",
-      "Eye-catching ad creation.",
-      "Ongoing campaign management.",
-      "Strategic remarketing tactics.",
-      "Detailed reporting & insights.",
+      "Customized design for your brand.",
+      "User-focused, conversion-driven UX.",
+      "Fully responsive for all devices.",
+      "SEO optimized for visibility.",
+      "Easy-to-use CMS for content updates.",
     ],
   },
   {
-    title: "Social Media Marketing",
-    image: "/smm.png",
-    description: `Grow awareness, engagement, and conversions across all platforms with personalized social media campaigns.`,
+    title: "Website Development",
+    image: "/development-section.png",
+    description:
+      "From basic sites to complex platforms, we build robust websites that drive engagement and business growth.",
     bullets: [
-      "Custom social strategy.",
-      "Engaging content & visuals.",
-      "Daily community management.",
-      "Precise social advertising.",
-      "Performance reporting dashboard.",
+      "Custom-built websites (incl. eCommerce).",
+      "Tailored for performance & speed.",
+      "SEO & mobile optimization built-in.",
+      "Secure, scalable and maintainable.",
+      "Ongoing support and updates.",
     ],
   },
   {
-    title: "PPC (Pay‑Per‑Click) Management",
-    image: "/ppc.png",
-    description: `Maximize your ad spend with high-performing PPC ads across platforms like Google and Bing.`,
+    title: "Software Development",
+    image: "/software-section.png",
+    description:
+      "We develop scalable software — from web apps to mobile apps and complex integrations — all customized for your needs.",
     bullets: [
-      "Precision keyword targeting.",
-      "Ad copy that converts.",
-      "Landing page optimization.",
-      "Smart bid management.",
-      "Conversion tracking & reports.",
+      "Web & Mobile App Development.",
+      "Custom software solutions.",
+      "Salesforce, HubSpot, Zapier integrations.",
+      "Agile development & transparent reporting.",
+      "On-time, on-budget delivery.",
     ],
   },
   {
-    title: "Email Marketing",
-    image: "/e.png",
-    description: `Nurture leads and drive sales with smart email strategies like automation, personalization & testing.`,
+    title: "CRM Integration & Automation",
+    image: "/crm-section.png",
+    description:
+      "Streamline your business workflows with powerful CRM integration and marketing automation solutions tailored to your needs.",
     bullets: [
-      "Segmented & targeted emails.",
-      "Automated drip campaigns.",
-      "Engaging personalized content.",
-      "Subject line & A/B testing.",
-      "Performance analytics tracking.",
+      "HubSpot, Zoho, Salesforce integration.",
+      "Automated lead capture & follow-ups.",
+      "Email campaign automation.",
+      "Customer journey tracking.",
+      "Sales pipeline optimization.",
     ],
   },
 ];
@@ -83,17 +85,18 @@ const stats = [
   [1000, "Brands Established"],
 ];
 
-export default function DigitalMarketingPage() {
+export default function DesignDevelopmentPage() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
 
   return (
     <section className="bg-[#0f172a] text-white py-section overflow-hidden relative">
-      {/* Background Animation */}
+      {/* Background Overlay Animation */}
       <div className="absolute inset-0 z-0 animate-bgPulse pointer-events-none bg-[radial-gradient(circle_at_30%_30%,#ff008040,transparent_60%),radial-gradient(circle_at_70%_70%,#00bfff40,transparent_60%)] backdrop-blur-[2px]" />
 
       {/* Hero Section */}
       <div className="relative z-10">
+        <div className="absolute inset-0  pointer-events-none" />
         <div className="max-w-7xl mx-auto px-container relative z-[2] mb-24">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -104,10 +107,10 @@ export default function DigitalMarketingPage() {
           >
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl font-bold">
-                Welcome to Our Digital Marketing Services
+                Welcome to Our Design & Development Services
               </h1>
               <p className="text-lg text-white/80">
-                From Google Ads to Email Marketing, we drive growth through targeted campaigns, creative content, and strategic optimization.
+                From stunning websites to advanced software and CRM integrations, we help businesses thrive in the digital world.
               </p>
             </div>
             <div className="w-full h-[350px] md:h-[400px] lg:h-[450px] rounded-xl overflow-hidden">
@@ -118,14 +121,14 @@ export default function DigitalMarketingPage() {
                 playsInline
                 className="w-full h-full object-cover rounded-xl"
               >
-                <source src="/herogif.mp4" type="video/mp4" />
+                <source src="/hero-bg.mp4" type="video/mp4" />
               </video>
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Cards Section */}
+      {/* Cards */}
       <div className="max-w-7xl mx-auto px-container relative z-10">
         <div className="grid md:grid-cols-2 gap-8">
           {sections.map(({ title, image, description, bullets }, idx) => (
@@ -147,6 +150,7 @@ export default function DigitalMarketingPage() {
               <h2 className="text-xl md:text-2xl font-bold mb-2">{title}</h2>
               <p className="text-body text-white/80 mb-4">{description}</p>
 
+              {/* Bullets Animated */}
               <motion.ul
                 initial="hidden"
                 whileInView="visible"
@@ -177,18 +181,19 @@ export default function DigitalMarketingPage() {
                 ))}
               </motion.ul>
 
+              {/* Button Animated */}
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 200 }}
                 className="mt-auto self-start bg-white text-black font-semibold px-4 py-2 rounded hover:bg-gray-200 transition"
               >
-                Hire Us
+                Discuss
               </motion.button>
             </motion.div>
           ))}
         </div>
 
-        {/* Stats */}
+        {/* Stats Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -197,9 +202,9 @@ export default function DigitalMarketingPage() {
           className="text-center mt-24"
           ref={ref}
         >
-          <h2 className="text-section-header font-bold">Let’s Grow Together</h2>
+          <h2 className="text-section-header font-bold">Let’s Build Together</h2>
           <p className="text-body text-white/80 mt-4 max-w-2xl mx-auto">
-            Trust our proven experience and measurable results to elevate your brand across every digital channel.
+            Trusted by 1000+ businesses worldwide — we deliver scalable, beautiful, and strategic solutions that convert.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-8">
             {stats.map(([target, label], i) => {
@@ -214,7 +219,7 @@ export default function DigitalMarketingPage() {
           </div>
         </motion.div>
 
-        {/* Contact */}
+        {/* Contact Section */}
         <div className="mt-24">
           <ContactPage />
         </div>

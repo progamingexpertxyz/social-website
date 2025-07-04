@@ -5,7 +5,6 @@ import { motion, useInView } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 import ContactPage from "@/components/contectpage";
 
-// Counter Hook
 function useCounter(target: number, trigger: boolean, duration = 1000) {
   const [count, setCount] = useState(0);
   useEffect(() => {
@@ -15,8 +14,8 @@ function useCounter(target: number, trigger: boolean, duration = 1000) {
       if (!startTime) startTime = timestamp;
       const elapsed = timestamp - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(eased * target));
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(easedProgress * target));
       if (progress < 1) requestAnimationFrame(animate);
     };
     requestAnimationFrame(animate);
@@ -24,75 +23,52 @@ function useCounter(target: number, trigger: boolean, duration = 1000) {
   return count;
 }
 
-// Sections Data
 const sections = [
   {
-    title: "Google Ads Services",
-    image: "/ads.png",
-    description: `Drive traffic, boost visibility, and grow your business with targeted Google Ads and measurable ROI.`,
+    title: "Amazon Store Services",
+    image: "/amazon-store.png", // Replace with your actual image
+    description:
+      "Our team of experts helps you launch, manage, and grow a profitable Amazon Store — no matter your experience level.",
     bullets: [
-      "In-depth keyword research.",
-      "Eye-catching ad creation.",
-      "Ongoing campaign management.",
-      "Strategic remarketing tactics.",
-      "Detailed reporting & insights.",
+      "Professional Amazon Storefront design.",
+      "Improved rankings & product visibility.",
+      "Product listing optimization.",
+      "Effective Amazon Ads strategy.",
+      "Inventory management made simple.",
     ],
   },
   {
-    title: "Social Media Marketing",
-    image: "/smm.png",
-    description: `Grow awareness, engagement, and conversions across all platforms with personalized social media campaigns.`,
+    title: "Amazon Store Optimization",
+    image: "/amazon-optimization.png", // Replace with your actual image
+    description:
+      "From storefront to listings, we optimize every element for conversions and traffic — letting you focus on growing your brand.",
     bullets: [
-      "Custom social strategy.",
-      "Engaging content & visuals.",
-      "Daily community management.",
-      "Precise social advertising.",
-      "Performance reporting dashboard.",
-    ],
-  },
-  {
-    title: "PPC (Pay‑Per‑Click) Management",
-    image: "/ppc.png",
-    description: `Maximize your ad spend with high-performing PPC ads across platforms like Google and Bing.`,
-    bullets: [
-      "Precision keyword targeting.",
-      "Ad copy that converts.",
-      "Landing page optimization.",
-      "Smart bid management.",
-      "Conversion tracking & reports.",
-    ],
-  },
-  {
-    title: "Email Marketing",
-    image: "/e.png",
-    description: `Nurture leads and drive sales with smart email strategies like automation, personalization & testing.`,
-    bullets: [
-      "Segmented & targeted emails.",
-      "Automated drip campaigns.",
-      "Engaging personalized content.",
-      "Subject line & A/B testing.",
-      "Performance analytics tracking.",
+      "SEO-friendly product listings.",
+      "Image & keyword enhancements.",
+      "Conversion-focused layout design.",
+      "Boosted organic and paid reach.",
+      "Automated tools for hassle-free growth.",
     ],
   },
 ];
 
 const stats = [
   [1700, "Projects Completed"],
-  [1300, "Websites Created"],
+  [1300, "Website Created"],
   [1200, "Happy Clients"],
-  [1000, "Brands Established"],
+  [1000, "Brand Established"],
 ];
 
-export default function DigitalMarketingPage() {
+export default function EcommerceOptimizationPage() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
 
   return (
     <section className="bg-[#0f172a] text-white py-section overflow-hidden relative">
-      {/* Background Animation */}
+      {/* Background animation */}
       <div className="absolute inset-0 z-0 animate-bgPulse pointer-events-none bg-[radial-gradient(circle_at_30%_30%,#ff008040,transparent_60%),radial-gradient(circle_at_70%_70%,#00bfff40,transparent_60%)] backdrop-blur-[2px]" />
 
-      {/* Hero Section */}
+      {/* Hero */}
       <div className="relative z-10">
         <div className="max-w-7xl mx-auto px-container relative z-[2] mb-24">
           <motion.div
@@ -104,10 +80,10 @@ export default function DigitalMarketingPage() {
           >
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl font-bold">
-                Welcome to Our Digital Marketing Services
+                Welcome to our Amazon Store Services!
               </h1>
               <p className="text-lg text-white/80">
-                From Google Ads to Email Marketing, we drive growth through targeted campaigns, creative content, and strategic optimization.
+                Selling on Amazon made easy — from storefront design to optimization, we manage everything so you can focus on scaling.
               </p>
             </div>
             <div className="w-full h-[350px] md:h-[400px] lg:h-[450px] rounded-xl overflow-hidden">
@@ -118,14 +94,14 @@ export default function DigitalMarketingPage() {
                 playsInline
                 className="w-full h-full object-cover rounded-xl"
               >
-                <source src="/herogif.mp4" type="video/mp4" />
+                <source src="/amazon-hero.mp4" type="video/mp4" />
               </video>
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Cards Section */}
+      {/* Cards */}
       <div className="max-w-7xl mx-auto px-container relative z-10">
         <div className="grid md:grid-cols-2 gap-8">
           {sections.map(({ title, image, description, bullets }, idx) => (
@@ -197,9 +173,9 @@ export default function DigitalMarketingPage() {
           className="text-center mt-24"
           ref={ref}
         >
-          <h2 className="text-section-header font-bold">Let’s Grow Together</h2>
+          <h2 className="text-section-header font-bold">Let’s Work</h2>
           <p className="text-body text-white/80 mt-4 max-w-2xl mx-auto">
-            Trust our proven experience and measurable results to elevate your brand across every digital channel.
+            Trusted by 1000+ e-commerce brands — we deliver real results, fast.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-8">
             {stats.map(([target, label], i) => {
