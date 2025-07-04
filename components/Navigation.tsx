@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -10,6 +11,8 @@ import { cn } from "@/lib/utils";
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,6 +30,22 @@ const Navigation = () => {
     }
   };
 
+  const handlePortfolioClick = () => {
+    if (pathname === "/") {
+      scrollToSection("featured");
+    } else {
+      router.push("/#featured");
+    }
+  };
+
+  const handleAboutClick = () => {
+    if (pathname === "/") {
+      scrollToSection("about");
+    } else {
+      router.push("/#about");
+    }
+  };
+
   return (
     <header
       className={cn(
@@ -34,12 +53,9 @@ const Navigation = () => {
         isScrolled ? "shadow-xl" : ""
       )}
     >
-      {/* 🔥 Background Overlay */}
       <div className="absolute inset-0 z-0 animate-bgPulse pointer-events-none bg-[radial-gradient(circle_at_30%_30%,#ff008040,transparent_60%),radial-gradient(circle_at_70%_70%,#00bfff40,transparent_60%)] backdrop-blur-[2px] rounded-full" />
 
-      {/* 🔘 Navigation Content */}
       <div className="relative z-10 flex items-center justify-between gap-8">
-        {/* Logo */}
         <Link href="/" className="relative w-10 h-10 shrink-0">
           <Image
             src="/logo.png"
@@ -53,14 +69,14 @@ const Navigation = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
           <button
-            onClick={() => scrollToSection("featured")}
+            onClick={handlePortfolioClick}
             className="text-sm font-medium text-gray-800 hover:text-black transition-colors"
           >
             Portfolio
           </button>
 
           <button
-            onClick={() => scrollToSection("about")}
+            onClick={handleAboutClick}
             className="text-sm font-medium text-gray-800 hover:text-black transition-colors"
           >
             About
@@ -75,7 +91,6 @@ const Navigation = () => {
               <ChevronDown className="h-4 w-4" />
             </button>
 
-            {/* Dropdown Services List */}
             <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
               <div className="py-2">
                 <div className="px-4 py-2 text-xs uppercase tracking-wider text-gray-500">
@@ -91,19 +106,15 @@ const Navigation = () => {
                     label: "Conversion Optimization",
                   },
                   {
-                    href: "/services/design-development",
-                    label: "Design & Development (Web, UI/UX, CRM)",
+                    href: "/Design-And-Development",
+                    label: "Design & Development (Web, UI/UX, Software, CRM)",
                   },
                   {
-                    href: "/services/software-development",
-                    label: "Software Development",
-                  },
-                  {
-                    href: "/services/content-strategy",
+                    href: "/Content-Strategy",
                     label: "Content & Strategy (Writing, Funnel)",
                   },
                   {
-                    href: "/services/ecommerce-optimization",
+                    href: "/E-Commerce-&-Optimization",
                     label: "E-Commerce & SEO (Amazon, Store Setup)",
                   },
                 ].map((item, idx) => (
@@ -140,17 +151,17 @@ const Navigation = () => {
         </button>
       </div>
 
-      {/* Mobile Menu Content */}
+      {/* Mobile Navigation Menu */}
       {isMobileMenuOpen && (
         <div className="relative mt-4 md:hidden border-t border-white/30 bg-white/80 backdrop-blur-md rounded-xl shadow-lg px-4 py-6 space-y-4">
           <button
-            onClick={() => scrollToSection("featured")}
+            onClick={handlePortfolioClick}
             className="block text-sm font-medium text-gray-800 hover:text-black"
           >
             Portfolio
           </button>
           <button
-            onClick={() => scrollToSection("about")}
+            onClick={handleAboutClick}
             className="block text-sm font-medium text-gray-800 hover:text-black"
           >
             About
